@@ -67,7 +67,7 @@ func Run(configFile string) (err error) {
 		utils.Print(Red("read config file error:"), err)
 		return
 	}
-	utils.Print(BgGreen(Black("Ⓜ starting m7s ")), BrightBlue(Version))
+	utils.Print(BgGreen(Black("Ⓜ starting live_go ")), BrightBlue(Version))
 	var cg map[string]interface{}
 	if _, err = toml.Decode(string(ConfigRaw), &cg); err == nil {
 		if cfg, ok := cg["LiveSdk"]; ok {
