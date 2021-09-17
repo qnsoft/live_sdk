@@ -80,7 +80,7 @@ func (t *AVTrack) setTS(ts uint32) {
 		t.Timestamp = time.Now()
 	} else {
 		if t.lastTs > ts || ts-t.lastTs > 10000 {
-			utils.Printf("timestamp wrong %s lastTs:%d currentTs:%d", t.Stream.StreamPath, t.lastTs, ts)
+			live_utils.Printf("timestamp wrong %s lastTs:%d currentTs:%d", t.Stream.StreamPath, t.lastTs, ts)
 			//按照频率估算时间戳增量
 			t.Timestamp = t.lastTime.Add(time.Second / t.timebase)
 		} else {
