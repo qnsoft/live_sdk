@@ -70,7 +70,7 @@ func Run(configFile string) (err error) {
 	utils.Print(BgGreen(Black("Ⓜ starting m7s ")), BrightBlue(Version))
 	var cg map[string]interface{}
 	if _, err = toml.Decode(string(ConfigRaw), &cg); err == nil {
-		if cfg, ok := cg["Engine"]; ok {
+		if cfg, ok := cg["LiveSdk"]; ok {
 			b, _ := json.Marshal(cfg)
 			if err = json.Unmarshal(b, config); err != nil {
 				log.Println(err)
