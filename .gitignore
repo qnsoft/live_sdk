@@ -17,5 +17,4 @@ router/
 *.test
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-main.go
 README1.md
