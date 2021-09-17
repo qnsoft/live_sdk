@@ -113,10 +113,10 @@ func (vt *VideoTrack) pushNalu(ts uint32, cts uint32, nalus ...[]byte) {
 		}
 		tmp[1] = 1
 		vt.Buffer.Write(tmp[:2])
-		utils.BigEndian.PutUint24(tmp, vt.CompositionTime)
+		live_utils.BigEndian.PutUint24(tmp, vt.CompositionTime)
 		vt.Buffer.Write(tmp[:3])
 		for _, nalu := range vt.NALUs {
-			utils.BigEndian.PutUint32(tmp, uint32(len(nalu)))
+			live_utils.BigEndian.PutUint32(tmp, uint32(len(nalu)))
 			vt.Buffer.Write(tmp)
 			vt.Buffer.Write(nalu)
 		}
@@ -194,7 +194,7 @@ func (vt *VideoTrack) pushNalu(ts uint32, cts uint32, nalus ...[]byte) {
 						case codec.NALU_SEI:
 						case codec.NALU_Filler_Data:
 						default:
-							utils.Printf("%s,nalType not support yet:%d,[0]=0x%X", vt.Stream.StreamPath, naluType, nalu[0])
+							live_utils.Printf("%s,nalType not support yet:%d,[0]=0x%X", vt.Stream.StreamPath, naluType, nalu[0])
 						}
 					}
 					if nonIDRs > 0 {
@@ -339,7 +339,7 @@ func (vt *VideoTrack) PushByteStream(ts uint32, payload []byte) {
 		vt.IDR = payload[0]>>4 == 1
 		vt.setTS(ts)
 		vt.Payload = payload
-		vt.CompositionTime = utils.BigEndian.Uint24(payload[2:])
+		vt.CompositionTime = live_utils.BigEndian.Uint24(payload[2:])
 		vt.ResetNALUs()
 		for nalus := payload[5:]; len(nalus) > vt.nalulenSize; {
 			nalulen := 0

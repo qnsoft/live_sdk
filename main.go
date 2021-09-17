@@ -50,11 +50,11 @@ func InstallPlugin(opt *PluginConfig) {
 	if parts := strings.Split(opt.Dir, "@"); len(parts) > 1 {
 		opt.Version = parts[len(parts)-1]
 	}
-	utils.Print(Green("install plugin"), BrightCyan(opt.Name), BrightBlue(opt.Version))
+	live_utils.Print(Green("install plugin"), BrightCyan(opt.Name), BrightBlue(opt.Version))
 }
 
 func init() {
-	if parts := strings.Split(utils.CurrentDir(), "@"); len(parts) > 1 {
+	if parts := strings.Split(live_utils.CurrentDir(), "@"); len(parts) > 1 {
 		Version = parts[len(parts)-1]
 	}
 }
@@ -64,10 +64,10 @@ func Run(configFile string) (err error) {
 	util.CreateShutdownScript()
 	StartTime = time.Now()
 	if ConfigRaw, err = ioutil.ReadFile(configFile); err != nil {
-		utils.Print(Red("read config file error:"), err)
+		live_utils.Print(Red("read config file error:"), err)
 		return
 	}
-	utils.Print(BgGreen(Black("Ⓜ starting live_go ")), BrightBlue(Version))
+	live_utils.Print(BgGreen(Black("Ⓜ starting live_go ")), BrightBlue(Version))
 	var cg map[string]interface{}
 	if _, err = toml.Decode(string(ConfigRaw), &cg); err == nil {
 		if cfg, ok := cg["LiveSdk"]; ok {
@@ -92,7 +92,7 @@ func Run(configFile string) (err error) {
 			}
 		}
 	} else {
-		utils.Print(Red("decode config file error:"), err)
+		live_utils.Print(Red("decode config file error:"), err)
 	}
 	return
 }

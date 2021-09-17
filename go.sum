@@ -49,6 +49,8 @@ github.com/qnsoft/live_utils v0.0.0-20210917014215-89187a65ca56 h1:dhGKvIqMCyDHl
 github.com/qnsoft/live_utils v0.0.0-20210917014215-89187a65ca56/go.mod h1:cMdUV1GhryS9VURmRriiRtUYUvjTjixw+oDvxw+Gl+0=
 github.com/qnsoft/live_utils v0.0.0-20210917020432-10cdc0d6cd51 h1:BjhyIiv5AoO+ynJnH7Di1xEg8naRe3CUZFTAbNxvUHI=
 github.com/qnsoft/live_utils v0.0.0-20210917020432-10cdc0d6cd51/go.mod h1:cMdUV1GhryS9VURmRriiRtUYUvjTjixw+oDvxw+Gl+0=
+github.com/qnsoft/live_utils v0.0.0-20210917083302-16b92f1773a1 h1:DXjBfoiGI4h/oiXism3fwQEVr7JeaaRdVNysx1ao4e0=
+github.com/qnsoft/live_utils v0.0.0-20210917083302-16b92f1773a1/go.mod h1:cMdUV1GhryS9VURmRriiRtUYUvjTjixw+oDvxw+Gl+0=
 github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518/go.mod h1:CKI4AZ4XmGV240rTHfO0hfE83S6/a3/Q1siZJ/vXf7A=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.5.1/go.mod h1:5W2xD1RspED5o8YsWQXVCued0rvSQ+mT+I5cxcmMvtA=

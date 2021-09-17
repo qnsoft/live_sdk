@@ -71,7 +71,7 @@ func (v *RTPVideo) demuxH264(payload []byte) (result *RTPNalu) {
 		for currOffset, naluSize := lenSize, 0; currOffset < naluLen; currOffset += naluSize {
 			naluSize = int(binary.BigEndian.Uint16(payload[currOffset:]))
 			if currOffset += stapaNALULengthSize; naluLen < currOffset+naluSize {
-				utils.Printf("STAP-A declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
+				live_utils.Printf("STAP-A declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
 				return
 			}
 			*current = &RTPNalu{Payload: payload[currOffset : currOffset+naluSize], Ts: v.absTs}
@@ -83,7 +83,7 @@ func (v *RTPVideo) demuxH264(payload []byte) (result *RTPNalu) {
 			naluSize = int(binary.BigEndian.Uint16(payload[currOffset:]))
 			currOffset += lenSize
 			if naluLen < currOffset+naluSize {
-				utils.Printf("MTAP16 declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
+				live_utils.Printf("MTAP16 declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
 				return
 			}
 			ts := binary.BigEndian.Uint16(payload[currOffset+3:])
@@ -129,7 +129,7 @@ func (v *RTPVideo) demuxH264(payload []byte) (result *RTPNalu) {
 		*/
 	case codec.NALU_FUA, codec.NALU_FUB:
 		if naluLen < lenSize {
-			utils.Printf("Payload is not large enough to be FU-A")
+			live_utils.Printf("Payload is not large enough to be FU-A")
 			return
 		}
 		if payload[1]&fuaStartBitmask != 0 {
@@ -187,7 +187,7 @@ func (v *RTPVideo) demuxH265(payload []byte) (result *RTPNalu) {
 			naluSize = int(binary.BigEndian.Uint16(payload[currOffset:]))
 			currOffset += 2
 			if naluLen < currOffset+naluSize {
-				utils.Printf("STAP-A declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
+				live_utils.Printf("STAP-A declared size(%d) is larger then buffer(%d)", naluSize, naluLen-currOffset)
 				return
 			}
 			*current = &RTPNalu{Payload: payload[currOffset : currOffset+naluSize], Ts: v.absTs}
