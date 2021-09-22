@@ -59,7 +59,7 @@ func init() {
 	}
 }
 
-// Run 启动Monibuca引擎
+// Run 启动LiveSdk引擎
 func Run(configFile string) (err error) {
 	util.CreateShutdownScript()
 	StartTime = time.Now()
@@ -67,7 +67,7 @@ func Run(configFile string) (err error) {
 		live_utils.Print(Red("read config file error:"), err)
 		return
 	}
-	live_utils.Print(BgGreen(Black("Ⓜ starting live_go ")), BrightBlue(Version))
+	live_utils.Print(BgGreen(Black("Ⓜ starting LiveServer ")), BrightBlue(Version))
 	var cg map[string]interface{}
 	if _, err = toml.Decode(string(ConfigRaw), &cg); err == nil {
 		if cfg, ok := cg["LiveSdk"]; ok {
