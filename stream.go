@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	. "github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora"
 	"github.com/qnsoft/live_utils"
 )
 
@@ -119,7 +119,7 @@ func (r *Stream) Close() {
 	r.VideoTracks.Dispose()
 	r.AudioTracks.Dispose()
 	r.DataTracks.Dispose()
-	live_utils.Print(Yellow("Stream destoryed :"), BrightCyan(r.StreamPath))
+	live_utils.Print(aurora.Yellow("Stream destoryed :"), aurora.BrightCyan(r.StreamPath))
 	TriggerHook(HOOK_STREAMCLOSE, r)
 	r.OnClose()
 }
@@ -139,9 +139,9 @@ func (r *Stream) Publish() bool {
 	r.AddOnClose(cancel)
 	r.StartTime = time.Now()
 	Streams.m[r.StreamPath] = r
-	live_utils.Print(Green("Stream publish:"), BrightCyan(r.StreamPath))
+	live_utils.Print(aurora.Green("Stream publish:"), aurora.BrightCyan(r.StreamPath))
 	r.timeout = time.AfterFunc(config.PublishTimeout, func() {
-		live_utils.Print(Yellow("Stream timeout:"), BrightCyan(r.StreamPath))
+		live_utils.Print(aurora.Yellow("Stream timeout:"), aurora.BrightCyan(r.StreamPath))
 		r.Close()
 	})
 	//触发钩子
@@ -184,13 +184,13 @@ func (r *Stream) WaitAudioTrack(names ...string) *AudioTrack {
 func (r *Stream) Subscribe(s *Subscriber) {
 	if s.Stream = r; r.Err() == nil {
 		s.SubscribeTime = time.Now()
-		live_utils.Print(Sprintf(Yellow("subscribe :%s %s,to Stream %s"), Blue(s.Type), Cyan(s.ID), BrightCyan(r.StreamPath)))
+		live_utils.Print(aurora.Sprintf(aurora.Yellow("subscribe :%s %s,to Stream %s"), aurora.Blue(s.Type), aurora.Cyan(s.ID), aurora.BrightCyan(r.StreamPath)))
 		s.Context, s.cancel = context.WithCancel(r)
 		r.subscribeMutex.Lock()
 		r.Subscribers = append(r.Subscribers, s)
 		TriggerHook(HOOK_SUBSCRIBE, s, len(r.Subscribers))
 		r.subscribeMutex.Unlock()
-		live_utils.Print(Sprintf(Yellow("%s subscriber %s added remains:%d"), BrightCyan(r.StreamPath), Cyan(s.ID), Blue(len(r.Subscribers))))
+		live_utils.Print(aurora.Sprintf(aurora.Yellow("%s subscriber %s added remains:%d"), aurora.BrightCyan(r.StreamPath), aurora.Cyan(s.ID), aurora.Blue(len(r.Subscribers))))
 	}
 }
 
@@ -201,7 +201,7 @@ func (r *Stream) UnSubscribe(s *Subscriber) {
 		r.subscribeMutex.Lock()
 		r.Subscribers, deleted = DeleteSliceItem_Subscriber(r.Subscribers, s)
 		if deleted {
-			live_utils.Print(Sprintf(Yellow("%s subscriber %s removed remains:%d"), BrightCyan(r.StreamPath), Cyan(s.ID), Blue(len(r.Subscribers))))
+			live_utils.Print(aurora.Sprintf(aurora.Yellow("%s subscriber %s removed remains:%d"), aurora.BrightCyan(r.StreamPath), aurora.Cyan(s.ID), aurora.Blue(len(r.Subscribers))))
 			l := len(r.Subscribers)
 			TriggerHook(HOOK_UNSUBSCRIBE, s, l)
 			if l == 0 && r.AutoUnPublish {
