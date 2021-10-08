@@ -1,6 +1,7 @@
 package live_sdk
 
 import (
+	"context"
 	"encoding/json"
 	"io/ioutil"
 	"log"
@@ -30,6 +31,7 @@ var (
 	StartTime     time.Time                        //启动时间
 	Plugins       = make(map[string]*PluginConfig) // Plugins 所有的插件配置
 	HasTranscoder bool
+	Ctx           context.Context
 )
 
 //PluginConfig 插件配置定义
@@ -60,7 +62,8 @@ func init() {
 }
 
 // Run 启动LiveSdk引擎
-func Run(configFile string) (err error) {
+func Run(ctx context.Context, configFile string) (err error) {
+	Ctx = ctx
 	util.CreateShutdownScript()
 	StartTime = time.Now()
 	if ConfigRaw, err = ioutil.ReadFile(configFile); err != nil {

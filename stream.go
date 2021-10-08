@@ -132,7 +132,7 @@ func (r *Stream) Publish() bool {
 		return false
 	}
 	var cancel context.CancelFunc
-	r.Context, cancel = context.WithCancel(context.Background())
+	r.Context, cancel = context.WithCancel(Ctx)
 	r.VideoTracks.Init(r.Context)
 	r.AudioTracks.Init(r.Context)
 	r.DataTracks.Init(r.Context)
